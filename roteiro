@@ -5,3 +5,5 @@ colocando . nas diferencas
 4 - preencher a matriz com a string
   for dentro de for
     matriz [i][j] = string [i*n+j]
+5 - fazer uma funcao que imprima os indices e a matriz
+
