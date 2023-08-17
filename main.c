@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+//isso eh uma mudanca
+
 char **alocaMatriz (int linhas, int colunas)
 {
     char **matrizAlocada;
