@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 char **alocaMatriz (int linhas, int colunas)
 {
@@ -34,10 +35,10 @@ void numDiagonais (int linhas, int colunas){
    printf("diagonais: %d", diagonais);
 }
 
-int *alocaString(int linhas, int colunas){
-    int *v;
+char *alocaString(int linhas, int colunas){
+    char *v;
 
-    v = (int*) malloc(linhas*colunas*sizeof(int));
+    v = (char*) malloc(linhas*colunas*sizeof(char));
     if(v==NULL){
         printf("Memoria insuficiente. \n");
         exit(1);
