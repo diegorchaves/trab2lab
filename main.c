@@ -29,11 +29,20 @@ void leLinhasColunas (int *linhas, int *colunas)
     scanf ("%d", colunas);
 }
 
+void numDiagonais (int linhas, int colunas){
+    int diagonais =     linhas+colunas-3;
+   printf("diagonais: %d", diagonais);
+}
+
 int main ()
 {
     int linhas, colunas;
 
     leLinhasColunas (&linhas, &colunas);
 
-    printf ("linhas = %d, colunas = %d", linhas, colunas);
+    printf ("linhas = %d, colunas = %d\n", linhas, colunas);
+
+    numDiagonais(linhas, colunas);
+
 }
+
