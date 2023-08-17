@@ -1,0 +1,7 @@
+1 - ler a string do usuario com fgets
+2 - fazer uma funcao que retire os espacos
+3 - fazer uma funcao que calcule o tamanho da string e compare com o tamanho da matriz,
+colocando . nas diferencas
+4 - preencher a matriz com a string
+  for dentro de for
+    matriz [i][j] = string [i*n+j]
