@@ -1,17 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-//isso eh uma mudanca
+void leLinhasColunas (int *linhas, int *colunas)
+{
+    printf ("Digite a quantidade de linhas: ");
+    scanf ("%d", linhas);
+    printf ("Digite a quantidade de colunas: ");
+    scanf ("%d", colunas);
+}
 
 char **alocaMatriz (int linhas, int colunas)
 {
     char **matrizAlocada;
+
     matrizAlocada = (char**)malloc(sizeof(char*)*linhas);
+    
     for (int i = 0; i < linhas; i++)
     {
         matrizAlocada[i] = (char*)malloc(sizeof(char)*colunas);
     }
+
+    if (matrizAlocada == NULL)
+    {
+        printf ("Memoria insuficiente.\n");
+        exit (1);
+    }
+
     return matrizAlocada;
 }
 
@@ -24,93 +40,105 @@ void desalocaMatriz (int linhas, char **matriz)
     free (matriz);
 }
 
-void leLinhasColunas (int *linhas, int *colunas)
+char *alocaString (int tamanho)
 {
-    printf ("Digite a quantidade de linhas: ");
-    scanf ("%d", linhas);
-    printf ("Digite a quantidade de colunas: ");
-    scanf ("%d", colunas);
-}
+    char *stringAlocada = (char*)malloc(sizeof(char)*(tamanho+1));
 
-void numDiagonais (int linhas, int colunas){
-    int diagonais =     linhas+colunas-3;
-   printf("diagonais: %d", diagonais);
-}
-
-char *alocaString(int linhas, int colunas){
-    char *v;
-
-    v = (char*) malloc(linhas*colunas*sizeof(char));
-    if(v==NULL){
-        printf("Memoria insuficiente. \n");
-        exit(1);
+    if (stringAlocada == NULL)
+    {
+        printf ("Memoria insuficiente.\n");
+        exit (1);
     }
-    return v;
+
+    return stringAlocada;
 }
 
-void leStringUser(char *string, int tamanhoMatriz){
-    printf("Digite uma String:  ");
-    getchar();
-    fgets(string, tamanhoMatriz+1, stdin);
+void clearBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
-void retiraEspacos(char *string, int tamanhoMatriz){
-    int posicao = 0;
-
-    for (int i = 0; i < tamanhoMatriz+1; i++) {
-        if (string[i] == ' ') continue;
-        string[posicao] = string[i];
-        posicao++;
-    }
-    string[posicao] = '\0';
+void leStringUser (char *stringUser, int tamanho)
+{
+    printf ("Digite a string (sem espacos): ");
+    getchar ();
+    fgets (stringUser, tamanho + 1, stdin);
+    getchar ();
 }
 
-void preencheRestoString(char *string, int tamanhoMatriz){
-    int num = strlen(string);
-
-    for(int i = num-1; i < tamanhoMatriz+1; i++){
-        string[i] = '.';
-    }
-    
-}
-
-void insereStringNaMatriz(char *string, char **matriz, int linhas, int colunas){
-    for(int i = 0; i < linhas; i++){
-        for(int j = 0; j < colunas; j++){
-            matriz[i][j] = string[i*colunas+j];
+void insereStringNaMatriz (char *stringUser, char **matriz, int linhas, int colunas)
+{
+    for (int i = 0; i < linhas; i++)
+    {
+        for (int j = 0; j < colunas; j++)
+        {
+            matriz[i][j] = stringUser[i*colunas+j];
         }
     }
 }
 
-void imprimeMatriz (int linhas, int colunas, char** matriz){
-    for(int i = 0; i < linhas; i++){
-        for(int j = 0; j < colunas; j++){
-            printf("%c ", matriz[i][j]);
+void imprimeMatriz (char **matriz, int linhas, int colunas)
+{
+    for (int i = 0; i < linhas; i++)
+    {
+        for (int j = 0; j < colunas; j++)
+        {
+            printf ("%c ", matriz[i][j]);
         }
-        printf("\n");
+        printf ("\n");
     }
-    printf("\n");
+}
+
+void minhaStrStr (char **matriz, char *stringUser, int linhas, int colunas)
+{
+    int tamanhoString = strlen (stringUser);
+
+    for (int i = 0; i < linhas; i++)
+    {
+        for (int j = 0; j < colunas - tamanhoString; j++)
+        {
+            bool encontrou = true;
+            for (int k = 0; k < tamanhoString; k++)
+            {
+                if (matriz[i][j+k] != stringUser[k])
+                {
+                    encontrou = false;
+                    break;
+                }
+            }
+            if (encontrou)
+            {
+                printf ("Ocorrencia encontrada no local [%d][%d]\n", i+1, j+1);
+            }
+        }
+    }
 }
 
 int main ()
 {
     int linhas, colunas;
     char **matriz;
-    char *string;
-    int tamanhoMatriz; 
-    
-    leLinhasColunas (&linhas, &colunas);
+    char *stringUser;
+    char *stringProcurada;
+    int tamanhoMatriz;
+
+    leLinhasColunas (&colunas, &linhas);
+
+    tamanhoMatriz = colunas * linhas;
+
     matriz = alocaMatriz(linhas, colunas);
-    string = alocaString(linhas, colunas);
-    printf ("linhas = %d, colunas = %d\n", linhas, colunas);
-    tamanhoMatriz = linhas*colunas;
+
+    stringUser = alocaString (tamanhoMatriz);
+
+    stringProcurada = alocaString (tamanhoMatriz);
+
+    leStringUser (stringUser, tamanhoMatriz);
+
+    insereStringNaMatriz (stringUser, matriz, linhas, colunas);
+
+    imprimeMatriz (matriz, linhas, colunas);
     
-    //numDiagonais(linhas, colunas);
-    leStringUser(string, tamanhoMatriz);
-    retiraEspacos(string, tamanhoMatriz);
-    preencheRestoString(string, tamanhoMatriz);
-    insereStringNaMatriz(string, matriz, linhas, colunas);
-    imprimeMatriz(linhas, colunas, matriz);
+    leStringUser (stringProcurada, tamanhoMatriz);
 
+    minhaStrStr (matriz, stringProcurada, linhas, colunas);
 }
-
