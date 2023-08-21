@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>    
 
 char **alocaMatriz (int linhas, int colunas)
 {
@@ -30,15 +31,10 @@ void leLinhasColunas (int *linhas, int *colunas)
     scanf ("%d", colunas);
 }
 
-void numDiagonais (int linhas, int colunas){
-    int diagonais =     linhas+colunas-3;
-   printf("diagonais: %d", diagonais);
-}
-
 char *alocaString(int linhas, int colunas){
     char *v;
 
-    v = (char*) malloc(linhas*colunas*sizeof(char));
+    v = (char*) malloc(linhas*colunas*sizeof(char)+1);
     if(v==NULL){
         printf("Memoria insuficiente. \n");
         exit(1);
@@ -46,30 +42,9 @@ char *alocaString(int linhas, int colunas){
     return v;
 }
 
-void leStringUser(char *string, int tamanhoMatriz){
+void leString(char *string, int tamanhoMatriz){
     printf("Digite uma String:  ");
-    getchar();
-    fgets(string, tamanhoMatriz+1, stdin);
-}
-
-void retiraEspacos(char *string, int tamanhoMatriz){
-    int posicao = 0;
-
-    for (int i = 0; i < tamanhoMatriz+1; i++) {
-        if (string[i] == ' ') continue;
-        string[posicao] = string[i];
-        posicao++;
-    }
-    string[posicao] = '\0';
-}
-
-void preencheRestoString(char *string, int tamanhoMatriz){
-    int num = strlen(string);
-
-    for(int i = num-1; i < tamanhoMatriz+1; i++){
-        string[i] = '.';
-    }
-    
+    scanf(" %s", string);
 }
 
 void insereStringNaMatriz(char *string, char **matriz, int linhas, int colunas){
@@ -90,25 +65,139 @@ void imprimeMatriz (int linhas, int colunas, char** matriz){
     printf("\n");
 }
 
+bool procuraHorizontalDireta(char **matriz, char *palavra, int linhas, int colunas){
+    bool encontrouLocal;
+    int tamanhoString = strlen (palavra);
+
+    for(int i = 0; i < linhas; i++){
+        for(int j = 0; j < colunas-tamanhoString+1; j++){
+            if(matriz[i][j] == palavra[0]){
+                encontrouLocal = true;
+                for(int k = 1; k < tamanhoString; k++){
+                    if(matriz[i][j+k] != palavra[k]){
+                        encontrouLocal = false;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    return encontrouLocal;
+}
+
+bool procuraHorizontalReversa(char **matriz, char *palavra, int linhas, int colunas){
+    bool encontrouLocal;
+    int tamanhoString = strlen (palavra);
+
+    for(int i = 0; i < linhas; i++){
+        for(int j = colunas-1; j >= colunas-tamanhoString; j--){
+            if(matriz[i][j] == palavra[0]){
+                encontrouLocal = true;
+                for(int k = 1; k < tamanhoString; k++){
+                    if(matriz[i][j-k] != palavra[k]){
+                        encontrouLocal = false;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    return encontrouLocal;
+}
+
+bool procuraVerticalDireta(char **matriz, char *palavra, int linhas, int colunas){
+    bool encontrouLocal;
+    int tamanhoString = strlen (palavra);
+
+    for(int i = 0; i < linhas-tamanhoString+1; i++){
+        for(int j = 0; j < colunas; j++){
+            if(matriz[i][j] == palavra[0]){
+                encontrouLocal = true;
+                for(int k = 1; k < tamanhoString; k++){
+                    if(matriz[i+k][j] != palavra[k]){
+                        encontrouLocal = false;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    return encontrouLocal;
+}
+
+bool procuraVerticalReversa(char **matriz, char *palavra, int linhas, int colunas){
+    bool encontrouLocal;
+    int tamanhoString = strlen (palavra);
+
+    for(int i = linhas-1; i >= linhas-tamanhoString; i--){
+        for(int j = 0; j < colunas; j++){
+            if(matriz[i][j] == palavra[0]){
+                encontrouLocal = true;
+                for(int k = 1; k < tamanhoString; k++){
+                    if(matriz[i-k][j] != palavra[k]){
+                        encontrouLocal = false;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    return encontrouLocal;
+}
+
+void procuraPalavra (char **matriz, char *palavra, int linhas, int colunas)
+{   
+    bool encontrou = false;
+
+    //horizontal direta
+    encontrou = procuraHorizontalDireta(matriz, palavra, linhas, colunas);
+
+    //horizontal reversa
+    if(!encontrou){
+       encontrou = procuraHorizontalReversa(matriz, palavra, linhas, colunas);
+    }
+    //vertical direta
+    if(!encontrou){
+       encontrou = procuraVerticalDireta(matriz, palavra, linhas, colunas);
+    }
+    //vertical inversa
+    if(!encontrou){
+       encontrou = procuraVerticalReversa(matriz, palavra, linhas, colunas);
+    }
+    
+
+    if(encontrou){
+        printf("Achou\n");
+    }else{
+        printf("nao achou\n");
+    }
+}
+
 int main ()
 {
     int linhas, colunas;
     char **matriz;
-    char *string;
+    char *stringUser;
+    char *stringProcurada;
     int tamanhoMatriz; 
+
     
     leLinhasColunas (&linhas, &colunas);
     matriz = alocaMatriz(linhas, colunas);
-    string = alocaString(linhas, colunas);
-    printf ("linhas = %d, colunas = %d\n", linhas, colunas);
+    stringUser = alocaString(linhas, colunas);
+    stringProcurada = alocaString(linhas, colunas);
     tamanhoMatriz = linhas*colunas;
     
     //numDiagonais(linhas, colunas);
-    leStringUser(string, tamanhoMatriz);
-    retiraEspacos(string, tamanhoMatriz);
-    preencheRestoString(string, tamanhoMatriz);
-    insereStringNaMatriz(string, matriz, linhas, colunas);
+    leString(stringUser, tamanhoMatriz);
+    insereStringNaMatriz(stringUser, matriz, linhas, colunas);
     imprimeMatriz(linhas, colunas, matriz);
-
+    leString(stringProcurada, tamanhoMatriz);
+    procuraPalavra(matriz, stringProcurada, linhas, colunas);
 }
+
 
