@@ -39,14 +39,41 @@ void desalocaMatriz (int linhas, char **matriz)
     free (matriz);
 }
 
+void imprimeIndexColunas (int colunas)
+{
+    for (int i = 0; i <= colunas; i++)
+    {
+        if (i < 10)
+        {
+            printf ("%d  ", i);
+        }
+        else
+        {
+            printf ("%d ", i);
+        }
+    }
+    printf ("\n");
+}
+
 void imprimeMatriz (char **matriz, int linhas, int colunas)
 {
+    imprimeIndexColunas (colunas);
+
     for (int i = 0; i < linhas; i++)
     {
+        if (i < 9)
+        {
+            printf ("%d  ", i+1);
+        }
+        else
+        {
+            printf ("%d ", i+1);
+        }
         for (int j = 0; j < colunas; j++)
         {
-            printf ("%c ", matriz[i][j]);
+            printf ("%c  ", matriz[i][j]);
         }
         printf ("\n");
     }
+
 }
