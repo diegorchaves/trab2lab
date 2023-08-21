@@ -110,16 +110,16 @@ void minhaStrStrReverse(char **matriz, char *stringUser, int linhas, int colunas
 {
     for (int i = 0; i < linhas; i++)
     {
-        for (int j = colunas; j > 0; j--)
+        for (int j = colunas - 1; j >= 0; j--)
         {
-            int k = colunas;
-            while (matriz[i][j + k] == stringUser[k] && stringUser[k] != '\0')
+            int k = 0;
+            while (matriz[i][j - k] == stringUser[k] && stringUser[k] != '\0')
             {
-                k--;
+                k++;
             }
             if (stringUser[k] == '\0')
             {
-                printf("substring encontrada na horizontal reversa no local [%d][%d]\n", i+2, j);
+                printf("substring encontrada na horizontal reversa no local [%d][%d]\n", i+1, j+1);
                 return;
             }
         }
@@ -127,6 +127,26 @@ void minhaStrStrReverse(char **matriz, char *stringUser, int linhas, int colunas
     //printf("substring não encontrada na matriz\n");
 }
 
+void minhaStrStrVert (char **matriz, char *stringUser, int linhas, int colunas)
+{
+    for (int j = 0; j < colunas; j++)
+    {
+        for (int i = 0; i < linhas; i++)
+        {
+            int k = 0;
+            while (matriz[i+k][j] == stringUser[k] && stringUser[k] != '\0' && (i+k) < linhas)
+            {
+                k++;
+            }
+            if (stringUser[k] == '\0')
+            {
+                printf("substring encontrada na vertical direta no local [%d][%d]\n", i+1, j+1);
+                return;
+            }
+        }
+    }
+    //printf("substring não encontrada na matriz\n");
+}
 
 int main ()
 {
@@ -156,7 +176,10 @@ int main ()
 
     puts (stringProcurada);
 
-    minhaStrStr (matriz, stringProcurada, linhas, colunas);
+    //minhaStrStr (matriz, stringProcurada, linhas, colunas);
 
-    minhaStrStrReverse (matriz, stringProcurada, linhas, colunas);
+    //minhaStrStrReverse (matriz, stringProcurada, linhas, colunas);
+
+    minhaStrStrVert (matriz, stringProcurada, linhas, colunas);
+
 }
