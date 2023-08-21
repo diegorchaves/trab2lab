@@ -134,13 +134,34 @@ void minhaStrStrVert (char **matriz, char *stringUser, int linhas, int colunas)
         for (int i = 0; i < linhas; i++)
         {
             int k = 0;
-            while (matriz[i+k][j] == stringUser[k] && stringUser[k] != '\0' && (i+k) < linhas)
+            while ((i+k) < linhas && matriz[i+k][j] == stringUser[k] && stringUser[k] != '\0')
             {
                 k++;
             }
             if (stringUser[k] == '\0')
             {
                 printf("substring encontrada na vertical direta no local [%d][%d]\n", i+1, j+1);
+                return;
+            }
+        }
+    }
+    //printf("substring não encontrada na matriz\n");
+}
+
+void minhaStrStrVertRev (char **matriz, char *stringUser, int linhas, int colunas)
+{
+    for (int j = 0; j < colunas; j++)
+    {
+        for (int i = linhas -1; i >= 0; i--)
+        {
+            int k = 0;
+            while ((i-k) >= 0 && matriz[i-k][j] == stringUser[k] && stringUser[k] != '\0')
+            {
+                k++;
+            }
+            if (stringUser[k] == '\0')
+            {
+                printf("substring encontrada na vertical inversa no local [%d][%d]\n", i+1, j+1);
                 return;
             }
         }
@@ -181,5 +202,8 @@ int main ()
     //minhaStrStrReverse (matriz, stringProcurada, linhas, colunas);
 
     minhaStrStrVert (matriz, stringProcurada, linhas, colunas);
+
+    minhaStrStrVertRev (matriz, stringProcurada, linhas, colunas);
+    
 
 }
