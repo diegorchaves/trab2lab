@@ -53,17 +53,13 @@ char *alocaString (int tamanho)
     return stringAlocada;
 }
 
-void clearBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
 void leStringUser (char *stringUser, int tamanho)
 {
     printf ("Digite a string (sem espacos): ");
-    getchar ();
-    fgets (stringUser, tamanho + 1, stdin);
-    getchar ();
+    //getchar ();
+    //fgets (stringUser, tamanho + 1, stdin);
+    //getchar ();
+    scanf ("%s", stringUser);
 }
 
 void insereStringNaMatriz (char *stringUser, char **matriz, int linhas, int colunas)
@@ -89,30 +85,48 @@ void imprimeMatriz (char **matriz, int linhas, int colunas)
     }
 }
 
-void minhaStrStr (char **matriz, char *stringUser, int linhas, int colunas)
+void minhaStrStr(char **matriz, char *stringUser, int linhas, int colunas)
 {
-    int tamanhoString = strlen (stringUser);
-
     for (int i = 0; i < linhas; i++)
     {
-        for (int j = 0; j < colunas - tamanhoString; j++)
+        for (int j = 0; j < colunas; j++)
         {
-            bool encontrou = true;
-            for (int k = 0; k < tamanhoString; k++)
+            int k = 0;
+            while (matriz[i][j + k] == stringUser[k] && stringUser[k] != '\0')
             {
-                if (matriz[i][j+k] != stringUser[k])
-                {
-                    encontrou = false;
-                    break;
-                }
+                k++;
             }
-            if (encontrou)
+            if (stringUser[k] == '\0')
             {
-                printf ("Ocorrencia encontrada no local [%d][%d]\n", i+1, j+1);
+                printf("substring encontrada na horizontal direta no local [%d][%d]\n", i+1, j+1);
+                return;
             }
         }
     }
+    //printf("substring não encontrada na matriz\n");
 }
+
+void minhaStrStrReverse(char **matriz, char *stringUser, int linhas, int colunas)
+{
+    for (int i = 0; i < linhas; i++)
+    {
+        for (int j = colunas; j > 0; j--)
+        {
+            int k = colunas;
+            while (matriz[i][j + k] == stringUser[k] && stringUser[k] != '\0')
+            {
+                k--;
+            }
+            if (stringUser[k] == '\0')
+            {
+                printf("substring encontrada na horizontal reversa no local [%d][%d]\n", i+2, j);
+                return;
+            }
+        }
+    }
+    //printf("substring não encontrada na matriz\n");
+}
+
 
 int main ()
 {
@@ -122,7 +136,7 @@ int main ()
     char *stringProcurada;
     int tamanhoMatriz;
 
-    leLinhasColunas (&colunas, &linhas);
+    leLinhasColunas (&linhas, &colunas);
 
     tamanhoMatriz = colunas * linhas;
 
@@ -140,5 +154,9 @@ int main ()
     
     leStringUser (stringProcurada, tamanhoMatriz);
 
+    puts (stringProcurada);
+
     minhaStrStr (matriz, stringProcurada, linhas, colunas);
+
+    minhaStrStrReverse (matriz, stringProcurada, linhas, colunas);
 }
