@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
+
 #include "busca.h"
 #include "matriz.h"
 #include "stringUser.h"
@@ -33,8 +30,6 @@ int main ()
     imprimeMatriz (matriz, linhas, colunas);
     
     leStringUser (stringProcurada, tamanhoMatriz);
-
-    puts (stringProcurada);
 
     minhaStrStr (matriz, stringProcurada, linhas, colunas);
 
