@@ -15,7 +15,7 @@ void retiraEspacos(char *string, int tamanhoMatriz){
     int tamanho = strlen(string);
     int count = 0;
     
-    for (int i = 0; string[i]; i++){
+    for (int i = 0; i < tamanho; i++){
         if (string[i] != ' '){
              string[count++] = string[i]; 
         }    
@@ -64,7 +64,7 @@ char *alocaString(int linhas, int colunas){
 }
 
 void leString(char *string, int tamanhoMatriz){
-    printf("Digite uma String:  ");
+    printf("Digite uma palavra:  ");
     scanf(" %[^\t\n]s", string);
 
     retiraEspacos(string, tamanhoMatriz);
@@ -209,7 +209,7 @@ bool procuraDiagonalPrincipalDireta(char **matriz, char *stringUser, int linhas,
           for (int j = 0; j < colunas; j++)
             {
               int k = 0;
-              while (((i+k) < linhas || (i+k) < colunas) && matriz[i+k][j+k] == stringUser[k] && stringUser[k] != '\0')
+              while ((i+k) < linhas && (j+k) < colunas && matriz[i+k][j+k] == stringUser[k] && stringUser[k] != '\0')
                 {
                     k++;
                 }
@@ -226,31 +226,115 @@ bool procuraDiagonalPrincipalDireta(char **matriz, char *stringUser, int linhas,
     return encontrouLocal;
 }
 
+bool procuraDiagonalPrincipalReversa(char **matriz, char *stringUser, int linhas, int colunas){
+    bool encontrouLocal = false;
+
+        for (int j = 0; j < colunas; j++)
+        {
+          for (int i = linhas -1; i >= 0 ; i--)
+            {
+              int k = 0;
+              while ((i-k) >= 0 && (j-k) >= 0 && matriz[i-k][j-k] == stringUser[k] && stringUser[k] != '\0')
+                {
+                    k++;
+                }
+              if (stringUser[k] == '\0')
+                {
+                    printf("substring encontrada na diagonal principal direta no local [%d][%d]\n", i+1, j+1);
+                    encontrouLocal = true;
+                    return encontrouLocal;
+                }
+            }
+        }
+
+
+    return encontrouLocal;
+}
+
+bool procuraDiagonalSecundariaDireta(char **matriz, char *stringUser, int linhas, int colunas){
+    bool encontrouLocal = false;
+
+        for (int i = 0; i < linhas; i++)
+        {
+          for (int j = 0; j < colunas; j++)
+            {
+              int k = 0;
+              while ((i+k) < linhas && (j-k) >= 0 && matriz[i+k][j-k] == stringUser[k] && stringUser[k] != '\0')
+                {
+                    k++;
+                }
+              if (stringUser[k] == '\0')
+                {
+                    printf("substring encontrada na diagonal secundaria direta no local [%d][%d]\n", i+1, j+1);
+                    encontrouLocal = true;
+                    return encontrouLocal;
+                }
+            }
+        }
+
+    return encontrouLocal;
+}
+
+bool procuraDiagonalSecundariaReversa(char **matriz, char *stringUser, int linhas, int colunas){
+    bool encontrouLocal = false;
+
+        for (int j = 0; j < colunas; j++)
+        {
+          for (int i = linhas -1; i >= 0 ; i--)
+            {
+              int k = 0;
+              while ((i-k) >= 0 && (j+k) < colunas && matriz[i-k][j+k] == stringUser[k] && stringUser[k] != '\0')
+                {
+                    k++;
+                }
+              if (stringUser[k] == '\0')
+                {
+                    printf("substring encontrada na diagonal secundaria reversa no local [%d][%d]\n", i+1, j+1);
+                    encontrouLocal = true;
+                    return encontrouLocal;
+                }
+            }
+        }
+
+
+    return encontrouLocal;
+}
+
 void procuraPalavra (char **matriz, char *palavra, int linhas, int colunas)
 {   
     bool encontrou = false;
 
     //horizontal direta
-    //    encontrou = procuraHorizontalDireta(matriz, palavra, linhas, colunas);
+       encontrou = procuraHorizontalDireta(matriz, palavra, linhas, colunas);
 
-    // //horizontal reversa
-    // if(!encontrou){
-    //    encontrou = procuraHorizontalReversa(matriz, palavra, linhas, colunas);
-    // }
-    // //vertical direta
-    // if(!encontrou){
-    //    encontrou = procuraVerticalDireta(matriz, palavra, linhas, colunas);
-    // }
-    // //vertical inversa
-    // if(!encontrou){
-    //    encontrou = procuraVerticalReversa(matriz, palavra, linhas, colunas);
-    // }
+    //horizontal reversa
     if(!encontrou){
-       encontrou = procuraDiagonalPrincipalDireta(matriz, palavra, linhas, colunas);
+       encontrou = procuraHorizontalReversa(matriz, palavra, linhas, colunas);
     }
-    // if(!encontrou){
-    //    encontrou = procuraDiagonalSecundaria(matriz, palavra, linhas, colunas);
-    // }
+    //vertical direta
+    if(!encontrou){
+       encontrou = procuraVerticalDireta(matriz, palavra, linhas, colunas);
+    }
+    //vertical reversa
+    if(!encontrou){
+       encontrou = procuraVerticalReversa(matriz, palavra, linhas, colunas);
+    }
+    // diagonal principal direta
+    if(!encontrou){
+        encontrou = procuraDiagonalPrincipalDireta(matriz, palavra, linhas, colunas);
+    }
+    // diagonal principal reversa
+    if(!encontrou){
+       encontrou = procuraDiagonalPrincipalReversa(matriz, palavra, linhas, colunas);
+    }
+    // diagonal secundaria direta
+    if(!encontrou){
+       encontrou = procuraDiagonalSecundariaDireta(matriz, palavra, linhas, colunas);
+    }
+    // diagonal secundaria reversa
+     if(!encontrou){
+       encontrou = procuraDiagonalSecundariaReversa(matriz, palavra, linhas, colunas);
+    }
     
 
     if(encontrou){
@@ -286,8 +370,6 @@ int main ()
     procuraPalavra(matriz, stringProcurada, linhas, colunas);   
     }
    
-
-
 }
 
 
