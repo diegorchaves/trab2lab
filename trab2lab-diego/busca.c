@@ -105,7 +105,6 @@ void buscaDiagonalPrincipalDireta (char **matriz, char *stringProcurada, int lin
                 {
                     printf("Palavra \"%s\" encontrada na diagonal principal direta no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1+(k), j+1+(--k));
                     *encontrou = true;
-
                 }
             }
         }
@@ -126,7 +125,6 @@ void buscaDiagonalPrincipalInversa (char **matriz, char *stringProcurada, int li
                 {
                     printf("Palavra \"%s\" encontrada na diagonal principal inversa no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1-(k), j+1-(--k));
                     *encontrou = true;
-
                 }
             }
         }
@@ -147,7 +145,6 @@ void buscaDiagonalSecundariaDireta (char **matriz, char *stringProcurada, int li
                 {
                     printf("Palavra \"%s\" encontrada na diagonal secundaria direta no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1+(k), j+1-(--k));
                     *encontrou = true;
-
                 }
             }
         }
@@ -168,7 +165,6 @@ void buscaDiagonalSecundariaInversa (char **matriz, char *stringProcurada, int l
                 {
                     printf("Palavra \"%s\" encontrada na diagonal secundaria inversa no local [%d][%d] ate [%d][%d]\n",stringProcurada, i+1, j+1, i+1-(k), j+1+(--k));
                     *encontrou = true;
-
                 }
             }
         }
