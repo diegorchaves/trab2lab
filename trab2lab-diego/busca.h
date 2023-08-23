@@ -1,19 +1,19 @@
 #include <stdbool.h>
 
-bool buscaHorizontalDireta (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaHorizontalDireta (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
-bool buscaHorizontarInversa (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaHorizontarInversa (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
-bool buscaVerticalDireta (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaVerticalDireta (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
-bool buscaVerticalInversa (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaVerticalInversa (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
-bool buscaDiagonalPrincipalDireta (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaDiagonalPrincipalDireta (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
-bool buscaDiagonalPrincipalInversa (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaDiagonalPrincipalInversa (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
-bool buscaDiagonalSecundariaDireta (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaDiagonalSecundariaDireta (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
-bool buscaDiagonalSecundariaInversa (char **matriz, char *stringProcurada, int linhas, int colunas);
+void buscaDiagonalSecundariaInversa (char **matriz, char *stringProcurada, int linhas, int colunas, bool *encontrou);
 
 void buscaPalavra (char **matriz, char *palavra, int linhas, int colunas);

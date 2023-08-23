@@ -1,4 +1,4 @@
-
+#include <stdlib.h>
 #include "busca.h"
 #include "matriz.h"
 #include "stringUser.h"
@@ -36,4 +36,8 @@ int main ()
         leStringProcurada (stringProcurada, tamanhoMatriz);
         buscaPalavra (matriz, stringProcurada, linhas, colunas);
     }
+    
+    desalocaMatriz(linhas, matriz);
+    free(stringUser);
+    free(stringProcurada);
 }

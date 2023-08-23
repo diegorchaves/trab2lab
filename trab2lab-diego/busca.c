@@ -4,10 +4,8 @@
 #include <stdbool.h>
 #include "busca.h"
 
-bool buscaHorizontalDireta (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaHorizontalDireta (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
-    bool encontrouLocal = false;
-
     for (int i = 0; i < linhas; i++)
     {
         for (int j = 0; j < colunas; j++)
@@ -20,19 +18,14 @@ bool buscaHorizontalDireta (char **matriz, char *stringProcurada, int linhas, in
             if (stringProcurada[k] == '\0')
             {
                 printf("Palavra \"%s\" encontrada na horizontal direta no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1, j+1+(--k));
-                encontrouLocal = true;
-                return encontrouLocal;
-
+                *encontrou = true;
             }
         }
     }
-    return encontrouLocal;
 }
 
-bool buscaHorizontalInversa (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaHorizontalInversa (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
-    bool encontrouLocal = false;
-
     for (int i = 0; i < linhas; i++)
     {
         for (int j = colunas - 1; j >= 0; j--)
@@ -45,23 +38,19 @@ bool buscaHorizontalInversa (char **matriz, char *stringProcurada, int linhas, i
             if (stringProcurada[k] == '\0')
             {
                 printf("Palavra \"%s\" encontrada na horizontal Inversa no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1, j+1-(--k));
-                encontrouLocal = true;
-                return encontrouLocal;
+                *encontrou = true;
             }
         }
     }
-    return encontrouLocal;
 }
 
-bool buscaVerticalDireta (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaVerticalDireta (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
     if (strcmp (stringProcurada, "sair") == 0)
     {
         printf ("Obrigado por jogar!\n");
         exit (1);
     }
-
-    bool encontrouLocal = false;
 
     for (int j = 0; j < colunas; j++)
     {
@@ -75,18 +64,14 @@ bool buscaVerticalDireta (char **matriz, char *stringProcurada, int linhas, int 
             if (stringProcurada[k] == '\0')
             {
                 printf("Palavra \"%s\" encontrada na vertical direta no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1+(--k), j+1);
-                encontrouLocal = true;
-                return encontrouLocal;
+                *encontrou = true;
             }
         }
-    }
-    return encontrouLocal;
+    }    
 }
 
-bool buscaVerticalInversa (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaVerticalInversa (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
-    bool encontrouLocal = false;
-
     for (int j = 0; j < colunas; j++)
     {
         for (int i = linhas -1; i >= 0; i--)
@@ -99,18 +84,14 @@ bool buscaVerticalInversa (char **matriz, char *stringProcurada, int linhas, int
             if (stringProcurada[k] == '\0')
             {
                 printf("Palavra \"%s\" encontrada na vertical inversa no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1-(--k), j+1);
-                encontrouLocal = true;
-                return encontrouLocal;
+                *encontrou = true;
             }
         }
     }
-    return encontrouLocal;
 }
 
-bool buscaDiagonalPrincipalDireta (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaDiagonalPrincipalDireta (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
-    bool encontrouLocal = false;
-
         for (int i = 0; i < linhas; i++)
         {
           for (int j = 0; j < colunas; j++)
@@ -123,19 +104,15 @@ bool buscaDiagonalPrincipalDireta (char **matriz, char *stringProcurada, int lin
               if (stringProcurada[k] == '\0')
                 {
                     printf("Palavra \"%s\" encontrada na diagonal principal direta no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1+(k), j+1+(--k));
-                    encontrouLocal = true;
-                    return encontrouLocal;
+                    *encontrou = true;
+
                 }
             }
         }
-
-    return encontrouLocal;
 }
 
-bool buscaDiagonalPrincipalInversa (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaDiagonalPrincipalInversa (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
-    bool encontrouLocal = false;
-
         for (int j = 0; j < colunas; j++)
         {
           for (int i = linhas -1; i >= 0 ; i--)
@@ -148,19 +125,15 @@ bool buscaDiagonalPrincipalInversa (char **matriz, char *stringProcurada, int li
               if (stringProcurada[k] == '\0')
                 {
                     printf("Palavra \"%s\" encontrada na diagonal principal inversa no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1-(k), j+1-(--k));
-                    encontrouLocal = true;
-                    return encontrouLocal;
+                    *encontrou = true;
+
                 }
             }
         }
-
-    return encontrouLocal;
 }
 
-bool buscaDiagonalSecundariaDireta (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaDiagonalSecundariaDireta (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
-    bool encontrouLocal = false;
-
         for (int i = 0; i < linhas; i++)
         {
           for (int j = 0; j < colunas; j++)
@@ -173,19 +146,15 @@ bool buscaDiagonalSecundariaDireta (char **matriz, char *stringProcurada, int li
               if (stringProcurada[k] == '\0')
                 {
                     printf("Palavra \"%s\" encontrada na diagonal secundaria direta no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1+(k), j+1-(--k));
-                    encontrouLocal = true;
-                    return encontrouLocal;
+                    *encontrou = true;
+
                 }
             }
         }
-
-    return encontrouLocal;
 }
 
-bool buscaDiagonalSecundariaInversa (char **matriz, char *stringProcurada, int linhas, int colunas)
+void buscaDiagonalSecundariaInversa (char **matriz, char *stringProcurada, int linhas,int colunas, bool *encontrou)
 {
-    bool encontrouLocal = false;
-
         for (int j = 0; j < colunas; j++)
         {
           for (int i = linhas -1; i >= 0 ; i--)
@@ -198,27 +167,24 @@ bool buscaDiagonalSecundariaInversa (char **matriz, char *stringProcurada, int l
               if (stringProcurada[k] == '\0')
                 {
                     printf("Palavra \"%s\" encontrada na diagonal secundaria inversa no local [%d][%d] ate [%d][%d]\n",stringProcurada, i+1, j+1, i+1-(k), j+1+(--k));
-                    encontrouLocal = true;
-                    return encontrouLocal;
+                    *encontrou = true;
+
                 }
             }
         }
-
-    return encontrouLocal;
 }
 
-void buscaPalavra (char **matriz, char *palavra, int linhas, int colunas)
+void buscaPalavra (char **matriz, char *palavra, int linhas,int colunas)
 {   
-    bool encontrou = false;
-
-    encontrou = buscaHorizontalDireta(matriz, palavra, linhas, colunas);
-    encontrou = buscaHorizontalInversa(matriz, palavra, linhas, colunas);    
-    encontrou = buscaVerticalDireta(matriz, palavra, linhas, colunas);
-    encontrou = buscaVerticalInversa(matriz, palavra, linhas, colunas);
-    encontrou = buscaDiagonalPrincipalDireta(matriz, palavra, linhas, colunas);
-    encontrou = buscaDiagonalPrincipalInversa(matriz, palavra, linhas, colunas);
-    encontrou = buscaDiagonalSecundariaDireta(matriz, palavra, linhas, colunas);
-    encontrou = buscaDiagonalSecundariaInversa(matriz, palavra, linhas, colunas);
+    bool encontrou = fa
+    buscaHorizontalDireta(matriz, palavra, linhas, colunas, &encontrou);
+    buscaHorizontalInversa(matriz, palavra, linhas, colunas, &encontrou);    
+    buscaVerticalDireta(matriz, palavra, linhas, colunas, &encontrou);
+    buscaVerticalInversa(matriz, palavra, linhas, colunas, &encontrou);
+    buscaDiagonalPrincipalDireta(matriz, palavra, linhas, colunas, &encontrou);
+    buscaDiagonalPrincipalInversa(matriz, palavra, linhas, colunas, &encontrou);
+    buscaDiagonalSecundariaDireta(matriz, palavra, linhas, colunas, &encontrou);
+    buscaDiagonalSecundariaInversa(matriz, palavra, linhas, colunas, &encontrou);
     
     if(!encontrou){
         printf("A palavra \"%s\" nao foi encontrada.\n", palavra);
