@@ -182,7 +182,7 @@ void buscaPalavra (char **matriz, char *palavra, int linhas,int colunas)
     buscaDiagonalSecundariaDireta(matriz, palavra, linhas, colunas, &encontrou);
     buscaDiagonalSecundariaInversa(matriz, palavra, linhas, colunas, &encontrou);
     
-    if(!encontrou)
+    if (!encontrou)
     {
         printf("A palavra \"%s\" nao foi encontrada.\n", palavra);
     }
