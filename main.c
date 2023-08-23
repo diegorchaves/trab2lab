@@ -23,21 +23,17 @@ int main ()
 
     leStringUser (stringUser, tamanhoMatriz);
 
+    retiraEspacos (stringUser, tamanhoMatriz);
+
     completaStringUser (stringUser, tamanhoMatriz);
 
     insereStringNaMatriz (stringUser, matriz, linhas, colunas);
 
     imprimeMatriz (matriz, linhas, colunas);
     
-    leStringUser (stringProcurada, tamanhoMatriz);
-
-    minhaStrStr (matriz, stringProcurada, linhas, colunas);
-
-    minhaStrStrReverse (matriz, stringProcurada, linhas, colunas);
-
-    minhaStrStrVert (matriz, stringProcurada, linhas, colunas);
-
-    minhaStrStrVertRev (matriz, stringProcurada, linhas, colunas);
-    
-    desalocaMatriz (linhas, matriz);
+    while (1)
+    {
+        leStringUser (stringProcurada, tamanhoMatriz);
+        buscaPalavra (matriz, stringProcurada, linhas, colunas);
+    }
 }

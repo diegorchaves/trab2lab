@@ -3,9 +3,9 @@
 #include <string.h>
 #include "stringUser.h"
 
-char *alocaString (int tamanho)
+char *alocaString (int tamanhoMatriz)
 {
-    char *stringAlocada = (char*)malloc(sizeof(char)*(tamanho+1));
+    char *stringAlocada = (char*)malloc(sizeof(char)*3*tamanhoMatriz);
 
     if (stringAlocada == NULL)
     {
@@ -16,10 +16,26 @@ char *alocaString (int tamanho)
     return stringAlocada;
 }
 
-void leStringUser (char *stringUser, int tamanho)
+void retiraEspacos(char *stringUser, int tamanhoMatriz)
 {
-    printf ("Digite a string (sem espacos): ");
-    scanf ("%s", stringUser);
+    int posicao = 0;
+
+    for (int i = 0; i < tamanhoMatriz * 2; i++) {
+        if (stringUser[i] == ' ')
+        {
+            continue;
+        }
+        stringUser[posicao] = stringUser[i];
+        posicao++;
+    }
+    stringUser[posicao] = '\0';
+}
+
+void leStringUser (char *stringUser, int tamanhoMatriz)
+{
+    printf ("Digite a string: ");
+    scanf(" %[^\t\n]s", stringUser);
+    retiraEspacos (stringUser, tamanhoMatriz);
 }
 
 void completaStringUser (char *stringUser, int tamanhoMatriz)

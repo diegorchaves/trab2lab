@@ -75,5 +75,4 @@ void imprimeMatriz (char **matriz, int linhas, int colunas)
         }
         printf ("\n");
     }
-
 }
