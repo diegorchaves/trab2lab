@@ -37,7 +37,7 @@ void buscaHorizontalInversa (char **matriz, char *stringProcurada, int linhas,in
             }
             if (stringProcurada[k] == '\0')
             {
-                printf("Palavra \"%s\" encontrada na horizontal Inversa no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1, j+1-(--k));
+                printf("Palavra \"%s\" encontrada na horizontal inversa no local [%d][%d] ate [%d][%d]\n", stringProcurada, i+1, j+1, i+1, j+1-(--k));
                 *encontrou = true;
             }
         }
