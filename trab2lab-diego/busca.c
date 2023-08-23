@@ -176,7 +176,7 @@ void buscaDiagonalSecundariaInversa (char **matriz, char *stringProcurada, int l
 
 void buscaPalavra (char **matriz, char *palavra, int linhas,int colunas)
 {   
-    bool encontrou = fa
+    bool encontrou = false;
     buscaHorizontalDireta(matriz, palavra, linhas, colunas, &encontrou);
     buscaHorizontalInversa(matriz, palavra, linhas, colunas, &encontrou);    
     buscaVerticalDireta(matriz, palavra, linhas, colunas, &encontrou);
