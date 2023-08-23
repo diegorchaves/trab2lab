@@ -1,5 +1,3 @@
 fazer buscas diagonais
 
-estrutura matriz
-
-pegar caractere por caractere
+struct matriz
