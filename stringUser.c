@@ -31,14 +31,20 @@ void retiraEspacos(char *stringUser, int tamanhoMatriz)
     stringUser[posicao] = '\0';
 }
 
-void leStringUser (char *stringUser, int tamanhoMatriz)
+void leStringMatriz (char *stringUser, int tamanhoMatriz)
 {
-    printf ("Digite a string: ");
+    printf ("Digite a string que sera inserida na matriz: ");
     scanf(" %[^\t\n]s", stringUser);
     retiraEspacos (stringUser, tamanhoMatriz);
 }
 
-void completaStringUser (char *stringUser, int tamanhoMatriz)
+void leStringProcurada (char *stringUser, int tamanhoMatriz)
+{
+    printf ("Digite a string a ser procurada (\"sair\" para terminar o jogo): ");
+    scanf ("%s", stringUser);
+}
+
+void completaStringMatriz (char *stringUser, int tamanhoMatriz)
 {
     for (int i = strlen(stringUser); i < tamanhoMatriz; i++)
     {

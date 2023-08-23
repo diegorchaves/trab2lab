@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
 #include "busca.h"
 
@@ -53,6 +55,12 @@ bool buscaHorizontalInversa (char **matriz, char *stringProcurada, int linhas, i
 
 bool buscaVerticalDireta (char **matriz, char *stringProcurada, int linhas, int colunas)
 {
+    if (strcmp (stringProcurada, "sair") == 0)
+    {
+        printf ("Obrigado por jogar!\n");
+        exit (1);
+    }
+
     bool encontrouLocal = false;
 
     for (int j = 0; j < colunas; j++)

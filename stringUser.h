@@ -1,8 +1,10 @@
 char *alocaString (int tamanho);
 
-void leStringUser (char *stringUser, int tamanho);
+void leStringMatriz (char *stringUser, int tamanho);
 
-void completaStringUser (char *stringUser, int tamanhoMatriz);
+void leStringProcurada (char *stringUser, int tamanhoMatriz);
+
+void completaStringMatriz (char *stringUser, int tamanhoMatriz);
 
 void insereStringNaMatriz (char *stringUser, char **matriz, int linhas, int colunas);
 

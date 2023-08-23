@@ -21,11 +21,11 @@ int main ()
 
     stringProcurada = alocaString (tamanhoMatriz);
 
-    leStringUser (stringUser, tamanhoMatriz);
+    leStringMatriz (stringUser, tamanhoMatriz);
 
     retiraEspacos (stringUser, tamanhoMatriz);
 
-    completaStringUser (stringUser, tamanhoMatriz);
+    completaStringMatriz (stringUser, tamanhoMatriz);
 
     insereStringNaMatriz (stringUser, matriz, linhas, colunas);
 
@@ -33,7 +33,7 @@ int main ()
     
     while (1)
     {
-        leStringUser (stringProcurada, tamanhoMatriz);
+        leStringProcurada (stringProcurada, tamanhoMatriz);
         buscaPalavra (matriz, stringProcurada, linhas, colunas);
     }
 }
