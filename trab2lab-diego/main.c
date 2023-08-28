@@ -37,7 +37,7 @@ int main ()
         buscaPalavra (matriz, stringProcurada, linhas, colunas);
     }
     
-    desalocaMatriz(linhas, matriz);
-    free(stringUser);
-    free(stringProcurada);
+    desalocaMatriz (linhas, matriz);
+    free (stringUser);
+    free (stringProcurada);
 }
